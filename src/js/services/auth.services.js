@@ -1,6 +1,5 @@
 import axios from 'axios';
-import apiEnv from '../config/api.config';
-import API_ENV from "../config/api.config";
+import API_ENV from '../config/api.config';
 
 /**
  * Function login. Make login request to API.

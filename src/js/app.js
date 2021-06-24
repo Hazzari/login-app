@@ -3,8 +3,9 @@ import '../css/style.css';
 
 import UI from './config/ui.config';
 import { validate } from "./helpers/validate";
-import { showInputError, removeInputError } from './views/forms';
+import { removeInputError, showInputError } from './views/forms';
 import { login } from "./services/auth.services";
+import { notify } from "./views/notifications";
 
 const {form, inputEmail, inputPassword} = UI;
 const inputs = [inputEmail, inputPassword];
@@ -30,19 +31,17 @@ async function onSubmit() {
             showInputError(el);
         }
         return isValidInput;
-
     });
 
     if (!isValidForm) return null;
 
     try {
         await login(inputEmail.value, inputPassword.value);
-        // show success notify
-
-
+        notify({msg: 'Login success', className: 'alert-success'});
         form.reset();
     } catch (err) {
-        // show error notify
+        notify({msg: 'Login not success', className: 'alert-danger', timeout: 5000});
     }
-
 }
+
+
